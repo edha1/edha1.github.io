@@ -1,0 +1,44 @@
+#map { 
+    height: 100vh; 
+}
+body { 
+    margin:0; 
+    padding: 0; 
+
+}
+
+html,body, #map{ 
+    height:100%;
+    width: 100vw;
+}
+#circlepopup { 
+    color: #5795cf; 
+    font-family:Georgia, 'Times New Roman', Times, serif
+
+}
+
+#markerpopup { 
+    color: #5795cf;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.labels{ 
+    color: #5795cf;
+    font-family: monospace;
+    font: size 15px;
+    text-align: center; 
+}
+
+.description{ 
+    color:#5795cf;
+    font-size: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+.url{ 
+    text-align: center;
+    color: #5795cf;
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
