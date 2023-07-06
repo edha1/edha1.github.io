@@ -3,10 +3,14 @@
 fetch("beamlines_data.json").then((res)=>{return res.json()}).then(function(data){
     console.log(data)
 
+    var overlayMaps= {}; 
 
     for (let i = 0, len = 8; i < len; i++){
         arr = data[i];
-        beams = arr['beamlines'];
+        layerName = arr['name'];
+        beams = arr['beamlines']; 
+        var markerLayer = [];
+
 
 
         for (let j = 0, len = beams.length; j< len; j++){ 
@@ -16,12 +20,16 @@ fetch("beamlines_data.json").then((res)=>{return res.json()}).then(function(data
             description = arr1['description'].toString()
             url= arr1['url'];
             name2 = name1.toString();
-            var marker = L.marker([coordinates[0],coordinates[1]]).addTo(map);
+            var marker = L.marker([coordinates[0],coordinates[1]]);
+            markerLayer.push(marker);
             marker.bindPopup("<h1 class = labels>"+name2+"</h1><b><p class = description>"+description+"</p></b><b><p class = url><a href='" +url+"'>Click here for more information</a></p></b>", { 
                 maxWidth: 220
-            }).openPopup();
+            });
         }
+        
+        overlayMaps[arr['name']]= L.layerGroup(markerLayer).addTo(map);
     }
+    var layerControl = L.control.layers(null,overlayMaps).addTo(map);
 })
 
 
@@ -72,7 +80,7 @@ function onLocationFound(e) {
     lat = e.latlng.lat; 
     lng = e.latlng.lng; 
     marker = L.marker([lat,lng], {icon: pedestrianIcon }).addTo(map);
-    markerPopup = marker.bindPopup('<p id = pedestrianpopup>You are Here</p>')
+    markerPopup = marker.bindPopup('<p id = pedestrianpopup>You are here</p>')
     marker.on('mouseover', openMarkerPopupup)
     marker.on('mouseout', closeMarkerPopup)
     circle = L.circle([lat,lng],{ 
